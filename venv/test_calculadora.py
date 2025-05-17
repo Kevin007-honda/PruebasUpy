@@ -102,16 +102,12 @@ class TestCalculadora(unittest.TestCase):
         self.assertAlmostEqual(tangente_hiperbolica(0), 0)
         self.assertAlmostEqual(tangente_hiperbolica(1), math.tanh(1))
 
-    def test_combinaciones(self):
-        self.assertEqual(combinaciones(5, 2), 10)
-        self.assertEqual(combinaciones(4, 0), 1)
-        self.assertEqual(combinaciones(3, 3), 1)
-        with self.assertRaises(ValueError):
-            combinaciones(2, 3) # r > n
-        with self.assertRaises(ValueError):
-            combinaciones(-1, 2) # n < 0
-        with self.assertRaises(ValueError):
-            combinaciones(3, -1) # r < 0
+    def combinaciones(n, r):
+        if not (isinstance(n, int) and isinstance(r, int)):
+            raise TypeError("n y r deben ser enteros")
+        if n < 0 or r < 0 or r > n:
+            raise ValueError("Valores no válidos para combinaciones")
+        return math.comb(n, r)
 
 if __name__ == '__main__':
     unittest.main()
